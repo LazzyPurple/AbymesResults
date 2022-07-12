@@ -7,7 +7,7 @@ require("./config/database");
 const app = express();
 
 //CORS setup
-/* const corsOptions = {
+const corsOptions = {
   origin: process.env.CLIENT_URL,
   credentials: true,
   allowedHeaders: ["sessionId", "Content-Type"],
@@ -15,7 +15,7 @@ const app = express();
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
 };
-app.use(cors(corsOptions)); */
+app.use(cors(corsOptions));
 
 //routes links
 const userRoutes = require("./routes/user.routes");
@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 //JWT
 app.get("*", checkUser);
-app.get("/jtwid", requireAuth, (req, res) => {
+app.get("/jwtid", requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id);
 });
 
